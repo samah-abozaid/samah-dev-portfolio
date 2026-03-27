@@ -1,0 +1,112 @@
+<div class="admin-header">
+    <h1>Projets</h1>
+    
+        
+        <a href="index.php?route=admin/add" class="btn btn--primary">
+        + Nouveau projet
+    </a>
+</div>
+
+<table class="admin-table">
+    <tbody>
+        <?php if (empty($projects)): ?>
+            <tr>
+                <td colspan="6">Aucun projet pour le moment.</td>
+            </tr>
+        <?php else: ?>
+            <?php foreach ($projects as $project): ?>
+                <tr>
+                  
+                    <td>
+                        <span class="badge">
+                            <?= htmlspecialchars($project->getTitle()) ?>
+                        </span>
+                    </td>
+               
+                    <td class="actions">
+                        <a href="index.php?route=admin/edit/<?= $project->getId() ?>"
+                           class="btn btn--edit">
+                            Modifier
+                        </a>
+                        <a href="index.php?route=admin/delete/<?= $project->getId() ?>"
+                           class="btn btn--delete"
+                           onclick="return confirm('Supprimer ce projet ?')">
+                            Supprimer
+                        </a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        <?php endif; ?>
+
+    </tbody>
+</table>
+
+<section class="projects">
+
+    <h1>Mes Projets</h1>
+
+    <?php if (empty($projects)): ?>
+        <p>Aucun projet pour le moment.</p>
+
+    <?php else: ?>
+
+        <div class="projects-grid">
+
+            <?php foreach ($projects as $project): ?>
+
+                <div class="project-card">
+
+                    <?php if ($project->getImage()): ?>
+                        <img 
+                            src="<?= htmlspecialchars($project->getImage()) ?>" 
+                            alt="<?= htmlspecialchars($project->getTitle()) ?>"
+                            class="project-card__image"
+                        >
+                    <?php else: ?>
+                        <div class="project-card__no-image">
+                            <span>Pas d'image</span>
+                        </div>
+                    <?php endif; ?>
+
+                    <div class="project-card__body">
+
+                        <span class="project-card__category">
+                            <?= htmlspecialchars($project->getCategory()->getName()) ?>
+                        </span>
+
+                        <h2><?= htmlspecialchars($project->getTitle()) ?></h2>
+
+                        <?php if ($project->getDescription()): ?>
+                            <p class="project-card__description">
+                                <?= htmlspecialchars($project->getDescription()) ?>
+                            </p>
+                        <?php endif; ?>
+
+                        <div class="project-card__links">
+
+                            <?php if ($project->getGithubUrl()): ?>
+                                <a href="<?= htmlspecialchars($project->getGithubUrl()) ?>" 
+                                   target="_blank"
+                                   class="btn btn--github">
+                                    GitHub →
+                                </a>
+                            <?php endif; ?>
+
+                            <a href="index.php?route=projects/<?= $project->getId() ?>" 
+                               class="btn btn--detail">
+                                Voir le détail →
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            <?php endforeach; ?>
+
+        </div>
+
+    <?php endif; ?>
+
+</section>

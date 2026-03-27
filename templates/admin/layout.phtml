@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= $title ?? 'Admin Portfolio' ?></title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar__logo">
+            <span>Admin</span>
+        </div>
+        <nav class="sidebar__nav">
+            <a href="index.php?route=admin/dashboard" class="sidebar__link">
+                Dashboard
+            </a>
+            <a href="index.php?route=admin/projects" class="sidebar__link">
+                Projets
+            </a>
+            <a href="index.php?route=" class="sidebar__link">
+                Voir le site
+            </a>
+            <a href="index.php?route=admin/logout" class="sidebar__link sidebar__link--logout">
+                Déconnexion
+            </a>
+        </nav>
+    </aside>
+
+    <main class="admin-main">
+        <div class="admin-content">
+            <?= $content ?>
+        </div>
+    </main>
+
+</body>
+</html>

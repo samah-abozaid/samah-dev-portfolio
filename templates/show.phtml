@@ -1,0 +1,47 @@
+<section class="project-detail">
+
+    <a href="index.php?route=projects" class="back-link">← Retour aux projets</a>
+
+    <?php if ($project->getImage()): ?>
+        <img 
+            src="public/images/<?= htmlspecialchars($project->getImage()) ?>" 
+            alt="<?= htmlspecialchars($project->getTitle()) ?>"
+            class="project-detail__image"
+        >
+    <?php endif; ?>
+
+    <div class="project-detail__body">
+
+        <span class="project-detail__category">
+            <?= htmlspecialchars($project->getCategory()->getName()) ?>
+        </span>
+
+        <h1><?= htmlspecialchars($project->getTitle()) ?></h1>
+
+        <p class="project-detail__description">
+            <?= htmlspecialchars($project->getDescription()) ?>
+        </p>
+
+        <div class="project-detail__links">
+
+            <?php if ($project->getGithubUrl()): ?>
+                <a href="<?= htmlspecialchars($project->getGithubUrl()) ?>" 
+                   target="_blank"
+                   class="btn btn--github">
+                    GitHub →
+                </a>
+            <?php endif; ?>
+
+            <?php if ($project->getDemoUrl()): ?>
+                <a href="<?= htmlspecialchars($project->getDemoUrl()) ?>" 
+                   target="_blank"
+                   class="btn btn--demo">
+                    Voir la démo →
+                </a>
+            <?php endif; ?>
+
+        </div>
+
+    </div>
+
+</section>

@@ -1,0 +1,60 @@
+<div class="admin-header">
+    <h1>Modifier le projet</h1>
+    <a href="index.php?route=admin" class="btn btn--back">
+        ← Retour
+    </a>
+</div>
+
+<form class="admin-form" 
+      action="index.php?route=admin/edit/<?= $project->getId() ?>" 
+      method="POST">
+
+    <div class="form-group">
+        <label for="title">Titre *</label>
+        <input type="text" id="title" name="title" 
+               value="<?= htmlspecialchars($project->getTitle()) ?>" required>
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" rows="5">
+            <?= htmlspecialchars($project->getDescription() ?? '') ?>
+        </textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="category_id">Catégorie *</label>
+        <select id="category_id" name="category_id" required>
+            <option value="">-- Choisir une catégorie --</option>
+            <?php foreach ($categories as $category): ?>
+                <option value="<?= $category->getId() ?>"
+                    <?= $category->getId() === $project->getCategory()->getId() ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($category->getName()) ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="github_url">URL GitHub</label>
+        <input type="url" id="github_url" name="github_url"
+               value="<?= htmlspecialchars($project->getGithubUrl() ?? '') ?>">
+    </div>
+
+    <div class="form-group">
+        <label for="demo_url">URL Demo</label>
+        <input type="url" id="demo_url" name="demo_url"
+               value="<?= htmlspecialchars($project->getDemoUrl() ?? '') ?>">
+    </div>
+
+    <div class="form-group">
+        <label for="image">Nom de l'image</label>
+        <input type="text" id="image" name="image"
+               value="<?= htmlspecialchars($project->getImage() ?? '') ?>">
+    </div>
+
+    <button type="submit" class="btn btn--primary">
+        Mettre à jour
+    </button>
+
+</form>
